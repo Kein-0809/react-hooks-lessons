@@ -1,10 +1,16 @@
-// useFetchUserというカスタムフックを使用するコンポーネント
+// SWRというライブラリを使用したバージョン
+// https://swr.vercel.app/
 
-import { useFetchUser } from "./hooks/useFetchUser";
 
-const Lesson2_3 = () => {
+import useSWR from "swr";
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
+const Lesson2_4 = () => {
+  const { data: user, isLoading: loading } = useSWR("https://jsonplaceholder.typicode.com/users/1", fetcher);
+
   // const { user, loading } = useFetchUser();
-  const { user, loading } = useFetchUser(1);
+  // const { user, loading } = useFetchUser(1);
   // const { user, loading } = useFetchUser(2);
   // const { user, loading } = useFetchUser(3);
 
@@ -35,4 +41,4 @@ const Lesson2_3 = () => {
   );
 };
 
-export default Lesson2_3;
+export default Lesson2_4;
